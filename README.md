@@ -35,7 +35,7 @@ O projeto foi projetado para ser executado em múltiplos terminais usando um lan
 
 1.  **Clone o Repositório:**
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
+    git clone https://github.com/arthurtosi/Multiroom-Chat-Server.git
     cd <NOME_DO_DIRETORIO>
     ```
 
@@ -97,7 +97,8 @@ O projeto inclui certificados SSL auto-assinados para desenvolvimento:
 - **`cert.pem`:** Certificado público do servidor
 - **`key.pem`:** Chave privada do servidor
 
-Durante a geração, você será solicitado a fornecer informações como país, estado, cidade, etc. Para desenvolvimento, você pode usar valores fictícios.
+Durante a geração, você será solicitado a fornecer informações como país, estado, cidade, etc.
+**Importante**: Apenas o servidor deve conter esses arquivos. O cliente não precisa.
 
 ### Como Funciona o SSL no Sistema
 
@@ -183,21 +184,6 @@ O ngrok é uma ferramenta que cria túneis seguros para expor serviços locais �
 - **Bypass de firewalls:** Funciona mesmo em redes corporativas ou educacionais restritivas.
 - **Segurança adicional:** O túnel ngrok é criptografado, adicionando uma camada extra de segurança além do SSL.
 - **Acesso global:** Qualquer pessoa com internet pode se conectar ao seu servidor de chat.
-
-### Solução de Problemas com ngrok
-
-**Erro: "Não foi possível conectar ao servidor"**
-- Verifique se o túnel ngrok está ativo e funcionando
-- Confirme se está usando a porta correta fornecida pelo ngrok
-- Certifique-se de que o servidor está rodando antes de iniciar o túnel ngrok
-
-**Erro: "Túnel expirado"**
-- Os túneis gratuitos do ngrok expiram após algumas horas
-- Reinicie o túnel ngrok para obter uma nova porta e endereço
-
-**Erro: "Porta já em uso"**
-- Certifique-se de que não há outro serviço usando a porta 12345
-- Você pode alterar a porta do servidor no código e iniciar o ngrok com a nova porta
 
 ## Como Testar
 

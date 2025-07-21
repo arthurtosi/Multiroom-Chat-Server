@@ -11,8 +11,6 @@ Este módulo implementa um servidor de chat multi-thread seguro que suporta:
 
 import socket
 import threading
-import json
-import os
 import ssl
 import database
 
@@ -55,7 +53,6 @@ def create_ssl_context():
         print(f"[ERRO] Erro inesperado na configuração SSL: {e}")
         return None
 
-
 def broadcast(msg, room, sender=None):
     """
     Transmite uma mensagem para todos os clientes em uma sala específica.
@@ -86,7 +83,6 @@ def broadcast(msg, room, sender=None):
     for dead_socket in dead_sockets:
         _handle_leave_room(dead_socket, silent=True)
 
-
 def _handle_register(sock):
     """Gerencia o processo de registro de usuário."""
     sock.send("\n--- REGISTRAR NOVO USUÁRIO ---\n".encode(ENCODING))
@@ -116,7 +112,6 @@ def _handle_register(sock):
                 ENCODING
             )
         )
-
 
 def _handle_login(sock):
     """
@@ -152,7 +147,6 @@ def _handle_login(sock):
         sock.send("\nErro: Nome de usuário ou senha inválidos.\n".encode(ENCODING))
         return False
 
-
 def _handle_list_rooms(sock):
     """Envia lista de salas disponíveis para o cliente."""
     all_rooms = database.get_rooms()
@@ -166,7 +160,6 @@ def _handle_list_rooms(sock):
         sock.send(f"\n--- SALAS DISPONÍVEIS ---\n{room_list_str}\n".encode(ENCODING))
     else:
         sock.send("\nNenhuma sala disponível.\n".encode(ENCODING))
-
 
 def _handle_create_room(sock):
     """Gerencia o processo de criação de salas públicas e privadas."""
@@ -223,7 +216,6 @@ def _handle_create_room(sock):
                     ENCODING
                 )
             )
-
 
 def _handle_join_room(sock):
     """
@@ -291,7 +283,6 @@ def _handle_join_room(sock):
     sock.send(f"\nVocê entrou na sala '{room_name}'.\n".encode(ENCODING))
     return True
 
-
 def _handle_leave_room(sock, silent=False):
     """
     Remove um cliente de sua sala atual.
@@ -314,7 +305,6 @@ def _handle_leave_room(sock, silent=False):
             sock.send("\nVocê saiu da sala.\n".encode(ENCODING))
         except Exception as e:
             print(f"[INFO] Não foi possível notificar cliente sobre saída da sala: {e}")
-
 
 def _handle_chat_mode(sock):
     """
@@ -359,7 +349,6 @@ def _handle_chat_mode(sock):
                     )
         except Exception as e:
             return False
-
 
 def handle_client(sock):
     """
@@ -474,7 +463,6 @@ Sua escolha:
             if sock in authenticated:
                 authenticated.discard(sock)
         sock.close()
-
 
 def main():
     """Loop principal de inicialização do servidor e tratamento de conexões."""
